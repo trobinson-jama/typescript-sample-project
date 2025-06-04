@@ -23,7 +23,9 @@ import type { BrowserServer } from './client/browserType';
 import type { LaunchAndroidServerOptions } from './client/types';
 import type { WebSocketEventEmitter } from './utilsBundle';
 
+// @description This is a sample description for the Android Server Launcher class
 export class AndroidServerLauncherImpl {
+  // @satisfies RRD-SREQ-5
   async launchServer(options: LaunchAndroidServerOptions = {}): Promise<BrowserServer> {
     const playwright = createPlaywright({ sdkLanguage: 'javascript', isServer: true });
     // 1. Pre-connect to the device
@@ -45,6 +47,7 @@ export class AndroidServerLauncherImpl {
     if (devices.length > 1)
       throw new Error(`More than one device found. Please specify deviceSerialNumber`);
 
+    // @verifies RRD-SREQ-6
     const device = devices[0];
 
     const path = options.wsPath ? (options.wsPath.startsWith('/') ? options.wsPath : `/${options.wsPath}`) : `/${createGuid()}`;
